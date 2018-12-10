@@ -1,8 +1,12 @@
+body {
+  background-image: url("http://www.designbolts.com/wp-content/uploads/2013/02/Cross-lined-embossed-Grey-Seamless-Pattern-For-Website-Background.jpg");
+}
 .grid {
+  margin-left: 39%;
+  margin-right: 39%;
   display: grid;
-  grid-template-columns: 100px 100px 100px;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 5px;
-  background-color: #fff;
   color: rgb(255, 255, 255);
 }
 
@@ -14,4 +18,37 @@
   border-radius: 5px;
   padding: 35px;
   font-size: 150%;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  box-shadow: 0 0 3px 3px rgba(86, 193, 255, 0.5);
+}
+
+.box:hover {
+  background-color: rgb(68, 148, 194);
+}
+
+h1 {
+  text-align: center;
+  color: rgb(86, 193, 255); 
+}
+
+#nextPlayer {
+  text-align: center;
+  color: rgb(86, 193, 255);
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  box-shadow: 0 0 3px 3px rgba(86, 193, 255, 0.5);
+}
+
+th, td {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-collapse: collapse;
+  color: rgb(86, 193, 255);
+  padding: 10px;
+  font-size: 22px;
+  text-align: center;
 }
