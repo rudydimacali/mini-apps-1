@@ -1,5 +1,5 @@
 var nextPlayer = "X";
-var nextPlayerName = "";
+var nextPlayerName, winner;
 var playerOneVictories = 0;
 var playerTwoVictories = 0;
 var gameBoard = [null, null, null, null, null, null, null, null, null];
@@ -37,9 +37,10 @@ let clearBoard = winner => {
 };
 
 let toggleBox = e => {
+  debugger;
   if (!e.target.textContent) {
-    gameBoard[Number(e.target.id)] = nextPlayer;
     e.target.textContent = nextPlayer;
+    gameBoard[Number(e.target.id)] = nextPlayer;
     if (nextPlayer === "X") {
       nextPlayer = "O";
       nextPlayerName = playerTwoName;
@@ -56,8 +57,11 @@ let toggleBox = e => {
       ) {
         nextPlayerName =
           gameBoard[i * 3] === "X" ? playerOneName : playerTwoName;
-        alert(nextPlayerName + " wins!");
-        clearBoard(gameBoard[i * 3]);
+        winner = gameBoard[i * 3];
+        setTimeout(function() {
+          alert(nextPlayerName + " wins!");
+          clearBoard(winner);
+        }, 1);
       }
       // Check for vertical row
       if (
@@ -66,8 +70,11 @@ let toggleBox = e => {
         gameBoard[i] === gameBoard[i + 6]
       ) {
         nextPlayerName = gameBoard[i] === "X" ? playerOneName : playerTwoName;
-        alert(nextPlayerName + " wins!");
-        clearBoard(gameBoard[i]);
+        winner = gameBoard[i];
+        setTimeout(function() {
+          alert(nextPlayerName + " wins!");
+          clearBoard(winner);
+        }, 1);
       }
     }
     // Check for diagonal row
@@ -77,8 +84,11 @@ let toggleBox = e => {
       gameBoard[0] === gameBoard[8]
     ) {
       nextPlayerName = gameBoard[0] === "X" ? playerOneName : playerTwoName;
-      alert(nextPlayerName + " wins!");
-      clearBoard(gameBoard[0]);
+      winner = gameBoard[0];
+      setTimeout(function() {
+        alert(nextPlayerName + " wins!");
+        clearBoard(winner);
+      }, 1);
     }
     if (
       gameBoard[2] !== null &&
@@ -86,12 +96,17 @@ let toggleBox = e => {
       gameBoard[2] === gameBoard[6]
     ) {
       nextPlayerName = gameBoard[2] === "X" ? playerOneName : playerTwoName;
-      alert(nextPlayerName + " wins!");
-      clearBoard(gameBoard[2]);
+      winner = gameBoard[2];
+      setTimeout(function() {
+        alert(nextPlayerName + " wins!");
+        clearBoard(winner);
+      }, 1);
     }
     if (!gameBoard.includes(null)) {
-      alert("Tie!");
-      clearBoard("tie");
+      setTimeout(function() {
+        alert("Tie!");
+        clearBoard("tie");
+      }, 1);
     }
     document.getElementById("nextPlayer").textContent =
       "Next player: " + nextPlayerName;
@@ -99,7 +114,6 @@ let toggleBox = e => {
 };
 
 var boxes = document.getElementsByClassName("box");
-console.log(boxes);
 for (var i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener("click", toggleBox);
 }
