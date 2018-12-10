@@ -37,7 +37,6 @@ let clearBoard = winner => {
 };
 
 let toggleBox = e => {
-  debugger;
   if (!e.target.textContent) {
     e.target.textContent = nextPlayer;
     gameBoard[Number(e.target.id)] = nextPlayer;
