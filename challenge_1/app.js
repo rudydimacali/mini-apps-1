@@ -6,7 +6,7 @@ let clearBoard = () => {
     boxes[i].textContent = "";
     gameBoard[i] = null;
   }
-  nextPlayer = "x";
+  nextPlayer = "X";
 };
 
 let toggleBox = e => {
