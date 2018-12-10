@@ -1,0 +1,17 @@
+.grid {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-gap: 5px;
+  background-color: #fff;
+  color: rgb(255, 255, 255);
+}
+
+.box {
+  margin: auto;
+  text-align: center;
+  background-color: rgb(86, 193, 255);
+  color: #fff;
+  border-radius: 5px;
+  padding: 35px;
+  font-size: 150%;
+}
