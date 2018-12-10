@@ -1,8 +1,9 @@
 var nextPlayer = "X";
-var gameBoard = [];
+var gameBoard = [null, null, null, null, null, null, null, null, null];
 
 let toggleBox = e => {
   if (!e.target.textContent) {
+    gameBoard[Number(e.target.id)] = nextPlayer;
     document.getElementById(e.target.id).textContent = nextPlayer;
     if (nextPlayer === "X") {
       nextPlayer = "O";
@@ -15,6 +16,5 @@ let toggleBox = e => {
 var boxes = document.getElementsByClassName("box");
 console.log(boxes);
 for (var i = 0; i < boxes.length; i++) {
-  console.log("test");
   boxes[i].addEventListener("click", toggleBox);
 }
