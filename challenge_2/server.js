@@ -1,41 +1,29 @@
-var express = require("express");
-var app = express();
-var path = require("path");
-var bodyParser = require("body-parser");
+const express = require("express");
+const app = express();
+const path = require("path");
+const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
+const renderModule = require("./client/app.js");
+const morgan = require("morgan");
 
-app.use(express.static("client"));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/client"));
+
+app.use(fileUpload());
+app.use(morgan("short"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static("client"));
+
+app.get("/", (req, res) => {
+  res.render("index", { csvReport: "" });
+});
 
 app.post("/upload_JSON", (req, res) => {
-  // Convert data entry into an array of objects
-  let inputData = JSON.parse(req.body.dataEntry);
-  let dataArr = [];
-  let addChildren = entry => {
-    dataArr.push({
-      firstName: entry.firstName,
-      lastName: entry.lastName,
-      county: entry.county,
-      city: entry.city,
-      role: entry.role,
-      sales: entry.sales
-    });
-    if (entry.children.length) {
-      entry.children.forEach(child => {
-        addChildren(child);
-      });
-    }
-  };
-  addChildren(inputData);
-  // Convert array of objects into CSV report format
-  let csvReportString = "firstName,lastName,county,city,role,sales";
-  dataArr.forEach(entry => {
-    csvReportString += `\n${entry.firstName},${entry.lastName},${
-      entry.county
-    },${entry.city},${entry.role},${entry.sales}`;
-  });
-
-  res.redirect("/");
+  let inputData = JSON.parse(req.files.dataEntry.data);
+  let csvReportString = renderModule.convertToCSV(inputData);
+  let csvHTML = renderModule.convertCSVToHTML(csvReportString);
+  res.render("index", { csvReport: csvHTML });
 });
 
 app.listen(8080);
