@@ -8,12 +8,14 @@
 </head>
 
 <body>
-  <form method="POST" action="/upload_JSON" enctype="multipart/form-data">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <form enctype="multipart/form-data">
     <input type="file" accept=".json" id="dataEntry" name="dataEntry"></input>
     <button type="submit" value="Submit" id="submitForm">Submit</button>
   </form>
   <h1>CSV Report</h1>
-  <p id='csvReport'><%- csvReport %></p>
+  <p id='csvReport'></p>
+  <script src="handleSubmit.js"></script>
 </body>
 
 </html>

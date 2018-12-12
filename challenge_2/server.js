@@ -16,14 +16,14 @@ app.use(bodyParser.json());
 app.use(express.static("client"));
 
 app.get("/", (req, res) => {
-  res.render("index", { csvReport: "" });
+  res.render("index");
 });
 
-app.post("/upload_JSON", (req, res) => {
+app.post("/", (req, res) => {
   let inputData = JSON.parse(req.files.dataEntry.data);
   let csvReportString = renderModule.convertToCSV(inputData);
   let csvHTML = renderModule.convertCSVToHTML(csvReportString);
-  res.render("index", { csvReport: csvHTML });
+  res.send(csvHTML);
 });
 
 app.listen(8080);
