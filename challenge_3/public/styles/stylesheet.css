@@ -1,0 +1,35 @@
+body {
+  background-image: url('https://i.stack.imgur.com/7YKUD.jpg');
+  color: rgb(231, 172, 95);
+  font-family: 'Arimo', sans-serif;
+}
+
+form {
+  text-align: center;
+  margin: 0 auto;
+}
+
+div {
+  margin: 0 auto;
+  text-align: center;
+}
+
+button {
+  text-align: center;
+  color: white;
+  padding: 3px 5px 3px 5px;
+  margin-top: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 1px 1px rgba(52, 191, 255, 0.5);
+  background-color: rgba(52, 191, 255, 0.3)
+}
+
+input {
+  display: inline-block;
+  margin-left: 15px;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Noto Serif SC', serif;
+}

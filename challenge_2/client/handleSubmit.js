@@ -6,8 +6,6 @@ $(document).ready(function() {
       url: "/",
       type: "POST",
       data: formData,
-      async: false,
-      cache: false,
       contentType: false,
       enctype: "multipart/form-data",
       processData: false,
