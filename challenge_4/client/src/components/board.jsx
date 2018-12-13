@@ -5,24 +5,31 @@ class Board extends Component {
     super(props);
   }
   render() {
-    let boardDisplay = "";
-    console.log(this.props.boardColumns);
-    for (var j = 5; j >= 0; j--) {
-      boardDisplay += "<tr>";
-      for (var i = 0; i < 7; i++) {
-        boardDisplay += `<td column="${i}">${
-          this.props.boardColumns[i][j]
-        }</td>`;
-      }
-      boardDisplay += "</tr>";
-    }
+    let boardDisplay = this.props.boardState.map((row, index) => {
+      return (
+        <tr row={index}>
+          {row.map((piece, index) => {
+            return (
+              <td column={index} onClick={this.props.clickPiece}>
+                {piece}
+              </td>
+            );
+          })}
+        </tr>
+      );
+    });
 
-    return (
-      <table
-        class="wrapper"
-        dangerouslySetInnerHTML={{ __html: boardDisplay }}
-      />
-    );
+    // for (var j = 5; j >= 0; j--) {
+    //   boardDisplay += "<tr>";
+    //   for (var i = 0; i < 7; i++) {
+    //     boardDisplay += `<td column="${i}" onClick="${this.props.clickPiece}">${
+    //       this.props.boardColumns[i][j]
+    //     }</td>`;
+    //   }
+    //   boardDisplay += "</tr>";
+    // }
+
+    return <table class="wrapper">{boardDisplay}</table>;
   }
 }
 

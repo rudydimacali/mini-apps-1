@@ -5,34 +5,38 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      boardColumn1: ["O", "O", "O", "O", "O", "O"],
-      boardColumn2: ["O", "O", "O", "O", "O", "O"],
-      boardColumn3: ["O", "O", "O", "O", "O", "O"],
-      boardColumn4: ["O", "O", "O", "O", "O", "O"],
-      boardColumn5: ["O", "O", "O", "O", "O", "O"],
-      boardColumn6: ["O", "O", "O", "O", "O", "O"],
-      boardColumn7: ["O", "O", "O", "O", "O", "O"]
+      boardState: [
+        ["O", "O", "O", "O", "O", "O", "O"],
+        ["O", "O", "O", "O", "O", "O", "O"],
+        ["O", "O", "O", "O", "O", "O", "O"],
+        ["O", "O", "O", "O", "O", "O", "O"],
+        ["O", "O", "O", "O", "O", "O", "O"],
+        ["O", "O", "O", "O", "O", "O", "O"]
+      ]
     };
+    this.clickPiece = this.clickPiece.bind(this);
   }
-  // clickPiece(column) {
-  //   for (var i = 6; i >= 0; i--) {
-  //     if (this.state.boardState[i].value === 'O')
-  //   }
-  // }
+  clickPiece(e) {
+    let newBoard = this.state.boardState.slice();
+    let column = e.target.getAttribute("column");
+    let i = 5;
+    debugger;
+    if (newBoard[0][column] !== "X") {
+      while (newBoard[i][column] === "X") {
+        i--;
+      }
+      newBoard[i][column] = "X";
+    }
+    console.log(newBoard);
+    this.setState({ boardState: newBoard });
+  }
   render() {
     return (
       <div>
         <h1>Connect Four!</h1>
         <Board
-          boardColumns={[
-            this.state.boardColumn1,
-            this.state.boardColumn2,
-            this.state.boardColumn3,
-            this.state.boardColumn4,
-            this.state.boardColumn5,
-            this.state.boardColumn6,
-            this.state.boardColumn7
-          ]}
+          boardState={this.state.boardState}
+          clickPiece={this.clickPiece}
         />
       </div>
     );
