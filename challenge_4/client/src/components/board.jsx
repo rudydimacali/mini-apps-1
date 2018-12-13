@@ -6,13 +6,17 @@ class Board extends Component {
   }
   render() {
     let boardDisplay = "";
-    this.props.boardState.forEach(child => {
+    console.log(this.props.boardColumns);
+    for (var j = 5; j >= 0; j--) {
       boardDisplay += "<tr>";
-      child.forEach(element => {
-        boardDisplay += `<td>${element}</td>`;
-      });
+      for (var i = 0; i < 7; i++) {
+        boardDisplay += `<td column="${i}">${
+          this.props.boardColumns[i][j]
+        }</td>`;
+      }
       boardDisplay += "</tr>";
-    });
+    }
+
     return (
       <table
         class="wrapper"
