@@ -26,7 +26,6 @@ app.post("/checkoutApp", (req, res) => {
         console.log(err);
       });
   } else {
-    console.log(req.body);
     collection
       .update({ _id: req.body[0] }, { $set: req.body[1] })
       .then(docs => {
