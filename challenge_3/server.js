@@ -16,15 +16,24 @@ app.listen(8080);
 const collection = db.get("users");
 
 app.post("/checkoutApp", (req, res) => {
-  if (Array.isArray(req.body)) {
+  if (req.body.length === 0) {
     collection
       .insert({})
       .then(docs => {
-        console.log(docs);
+        res.send(docs._id);
       })
       .catch(err => {
-        collection.log(err);
+        console.log(err);
+      });
+  } else {
+    console.log(req.body);
+    collection
+      .update({ _id: req.body[0] }, { $set: req.body[1] })
+      .then(docs => {
+        res.send("Success!");
+      })
+      .catch(err => {
+        throw err;
       });
   }
-  // collection.insert([req.body])
 });

@@ -30,10 +30,10 @@ class App extends React.Component {
     $.ajax({
       url: "/checkoutApp",
       type: "POST",
-      data: JSON.stringify(["INITIALIZE"]),
+      data: JSON.stringify([]),
       contentType: "application/json; charset=utf-8",
-      success: function(response) {
-        console.log("Success!");
+      success: response => {
+        this.setState({ sessionId: response });
       }
     });
     this.setState({ page: 1 });
@@ -49,7 +49,7 @@ class App extends React.Component {
     $.ajax({
       url: "/checkoutApp",
       type: "POST",
-      data: JSON.stringify(accountState),
+      data: JSON.stringify([this.state.sessionId, accountState]),
       contentType: "application/json; charset=utf-8",
       success: function(response) {
         console.log("Success!");
@@ -70,7 +70,7 @@ class App extends React.Component {
     $.ajax({
       url: "/checkoutApp",
       type: "POST",
-      data: JSON.stringify(accountState),
+      data: JSON.stringify([this.state.sessionId, shippingState]),
       contentType: "application/json; charset=utf-8",
       success: function(response) {
         console.log("Success!");
@@ -89,7 +89,7 @@ class App extends React.Component {
     $.ajax({
       url: "/checkoutApp",
       type: "POST",
-      data: JSON.stringify(accountState),
+      data: JSON.stringify([this.state.sessionId, billingState]),
       contentType: "application/json; charset=utf-8",
       success: function(response) {
         console.log("Success!");
