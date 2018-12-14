@@ -1,7 +1,25 @@
 table {
   margin: 0 auto;
+  background-color: blue;
 }
 
 h1 {
   text-align: center;
+}
+
+td {
+  background-color: white;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+}
+
+.red {
+  background-color: red;
+  color: red;
+}
+
+.yellow {
+  background-color: yellow;
+  color: yellow;
 }

@@ -9,26 +9,33 @@ class Board extends Component {
       return (
         <tr row={index}>
           {row.map((piece, index) => {
-            return (
-              <td column={index} onClick={this.props.clickPiece}>
-                {piece}
-              </td>
-            );
+            if (piece === "O") {
+              return (
+                <td column={index} onClick={this.props.clickPiece}>
+                  {piece}
+                </td>
+              );
+            } else if (piece === "X") {
+              return (
+                <td class="red" column={index} onClick={this.props.clickPiece}>
+                  {piece}
+                </td>
+              );
+            } else if (piece === "Y") {
+              return (
+                <td
+                  class="yellow"
+                  column={index}
+                  onClick={this.props.clickPiece}
+                >
+                  {piece}
+                </td>
+              );
+            }
           })}
         </tr>
       );
     });
-
-    // for (var j = 5; j >= 0; j--) {
-    //   boardDisplay += "<tr>";
-    //   for (var i = 0; i < 7; i++) {
-    //     boardDisplay += `<td column="${i}" onClick="${this.props.clickPiece}">${
-    //       this.props.boardColumns[i][j]
-    //     }</td>`;
-    //   }
-    //   boardDisplay += "</tr>";
-    // }
-
     return <table class="wrapper">{boardDisplay}</table>;
   }
 }
