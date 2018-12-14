@@ -54,7 +54,6 @@ export default class App extends React.Component {
   checkBoard(row, column) {
     let currentBoard = this.state.boardState.slice();
     // Check row
-    console.log(currentBoard);
     let rowWin = false;
     let winner = "";
     for (var i = 0; i < 4; i++) {
@@ -95,6 +94,74 @@ export default class App extends React.Component {
 
     // Check diagonals
     let diagonalWin = false;
+
+    // LEFT DIAGONAL CHECK
+    let leftDiagonalArray = [];
+    let leftStartRow = row;
+    let leftStartCol = column;
+    while (leftStartRow < 5 && leftStartCol > 0) {
+      leftStartRow++;
+      leftStartCol--;
+    }
+    while (leftStartRow >= 0 && leftStartCol < 7) {
+      leftDiagonalArray.push(currentBoard[leftStartRow][leftStartCol]);
+      leftStartRow--;
+      leftStartCol++;
+    }
+    if (leftDiagonalArray.length >= 4) {
+      var i = 0;
+      while (i <= leftDiagonalArray.length - 4) {
+        if (
+          leftDiagonalArray[i] !== "O" &&
+          leftDiagonalArray[i] === leftDiagonalArray[i + 1] &&
+          leftDiagonalArray[i + 1] === leftDiagonalArray[i + 2] &&
+          leftDiagonalArray[i + 2] === leftDiagonalArray[i + 3]
+        ) {
+          diagonalWin = true;
+          winner = leftDiagonalArray[i] === "X" ? "Red" : "Yellow";
+        }
+        i++;
+      }
+    }
+    if (diagonalWin) {
+      alert(`${winner} wins!`);
+      this.resetBoard();
+      return;
+    }
+
+    // RIGHT DIAGONAL CHECK
+    let rightDiagonalArray = [];
+    let rightStartRow = row;
+    let rightStartCol = column;
+    while (rightStartRow < 5 && rightStartCol < 6) {
+      rightStartRow++;
+      rightStartCol++;
+    }
+    while (rightStartRow >= 0 && rightStartCol >= 0) {
+      rightDiagonalArray.push(currentBoard[rightStartRow][rightStartCol]);
+      rightStartRow--;
+      rightStartCol--;
+    }
+    if (rightDiagonalArray.length >= 4) {
+      var i = 0;
+      while (i <= rightDiagonalArray.length - 4) {
+        if (
+          rightDiagonalArray[i] !== "O" &&
+          rightDiagonalArray[i] === rightDiagonalArray[i + 1] &&
+          rightDiagonalArray[i + 1] === rightDiagonalArray[i + 2] &&
+          rightDiagonalArray[i + 2] === rightDiagonalArray[i + 3]
+        ) {
+          diagonalWin = true;
+          winner = rightDiagonalArray[i] === "X" ? "Red" : "Yellow";
+        }
+        i++;
+      }
+    }
+    if (diagonalWin) {
+      alert(`${winner} wins!`);
+      this.resetBoard();
+      return;
+    }
 
     // Check for tie
     let rowsComplete = [];
