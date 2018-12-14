@@ -17,6 +17,7 @@ export default class App extends React.Component {
       nextPlayer: "X"
     };
     this.clickPiece = this.clickPiece.bind(this);
+    this.checkBoard = this.checkBoard.bind(this);
   }
   clickPiece(e) {
     let newBoard = this.state.boardState.slice();
@@ -33,6 +34,34 @@ export default class App extends React.Component {
       boardState: newBoard,
       nextPlayer: nextPlayer
     });
+    this.checkBoard(i, Number(column));
+  }
+  checkBoard(row, column) {
+    // Check row
+    
+    // Check column
+
+    // Check diagonals
+
+    // Check for tie
+    let boardComplete = false;
+    this.state.boardState.forEach(row => {
+      if (!row.includes('O')) {
+        boardComplete = true;
+      }
+    })
+    if (boardComplete) => {
+      alert('Tie!');
+      this.setState({
+        boardState: [
+          ["O", "O", "O", "O", "O", "O", "O"],
+          ["O", "O", "O", "O", "O", "O", "O"],
+          ["O", "O", "O", "O", "O", "O", "O"],
+          ["O", "O", "O", "O", "O", "O", "O"],
+          ["O", "O", "O", "O", "O", "O", "O"],
+          ["O", "O", "O", "O", "O", "O", "O"]
+        ]});
+    }
   }
   render() {
     return (
