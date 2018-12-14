@@ -19,6 +19,20 @@ export default class App extends React.Component {
     };
     this.clickPiece = this.clickPiece.bind(this);
     this.checkBoard = this.checkBoard.bind(this);
+    this.resetBoard = this.resetBoard.bind(this);
+  }
+  resetBoard() {
+    this.setState({
+      boardState: [
+        ["O", "O", "O", "O", "O", "O", "O"],
+        ["O", "O", "O", "O", "O", "O", "O"],
+        ["O", "O", "O", "O", "O", "O", "O"],
+        ["O", "O", "O", "O", "O", "O", "O"],
+        ["O", "O", "O", "O", "O", "O", "O"],
+        ["O", "O", "O", "O", "O", "O", "O"]
+      ],
+      nextPlayer: "X"
+    });
   }
   clickPiece(e) {
     let newBoard = this.state.boardState.slice();
@@ -56,20 +70,28 @@ export default class App extends React.Component {
     }
     if (rowWin) {
       alert(`${winner} wins!`);
-      this.setState({
-        boardState: [
-          ["O", "O", "O", "O", "O", "O", "O"],
-          ["O", "O", "O", "O", "O", "O", "O"],
-          ["O", "O", "O", "O", "O", "O", "O"],
-          ["O", "O", "O", "O", "O", "O", "O"],
-          ["O", "O", "O", "O", "O", "O", "O"],
-          ["O", "O", "O", "O", "O", "O", "O"]
-        ]
-      });
+      this.resetBoard();
+      return;
     }
 
     // Check column
     let columnWin = false;
+    for (var i = 0; i < 3; i++) {
+      if (
+        currentBoard[i][column] !== "O" &&
+        currentBoard[i][column] === currentBoard[i + 1][column] &&
+        currentBoard[i + 1][column] === currentBoard[i + 2][column] &&
+        currentBoard[i + 2][column] === currentBoard[i + 3][column]
+      ) {
+        columnWin = true;
+        winner = currentBoard[i][column] === "X" ? "Red" : "Yellow";
+      }
+    }
+    if (columnWin) {
+      alert(`${winner} wins!`);
+      this.resetBoard();
+      return;
+    }
 
     // Check diagonals
     let diagonalWin = false;
@@ -82,16 +104,8 @@ export default class App extends React.Component {
     let boardComplete = !rowsComplete.includes(false) ? true : false;
     if (boardComplete) {
       alert("Tie!");
-      this.setState({
-        boardState: [
-          ["O", "O", "O", "O", "O", "O", "O"],
-          ["O", "O", "O", "O", "O", "O", "O"],
-          ["O", "O", "O", "O", "O", "O", "O"],
-          ["O", "O", "O", "O", "O", "O", "O"],
-          ["O", "O", "O", "O", "O", "O", "O"],
-          ["O", "O", "O", "O", "O", "O", "O"]
-        ]
-      });
+      this.resetBoard();
+      return;
     }
   }
   render() {
