@@ -40,7 +40,33 @@ export default class App extends React.Component {
   checkBoard(row, column) {
     let currentBoard = this.state.boardState.slice();
     // Check row
+    console.log(currentBoard);
     let rowWin = false;
+    let winner = "";
+    for (var i = 0; i < 4; i++) {
+      if (
+        currentBoard[row][i] !== "O" &&
+        currentBoard[row][i] === currentBoard[row][i + 1] &&
+        currentBoard[row][i + 1] === currentBoard[row][i + 2] &&
+        currentBoard[row][i + 2] === currentBoard[row][i + 3]
+      ) {
+        rowWin = true;
+        winner = currentBoard[row][i] === "X" ? "Red" : "Yellow";
+      }
+    }
+    if (rowWin) {
+      alert(`${winner} wins!`);
+      this.setState({
+        boardState: [
+          ["O", "O", "O", "O", "O", "O", "O"],
+          ["O", "O", "O", "O", "O", "O", "O"],
+          ["O", "O", "O", "O", "O", "O", "O"],
+          ["O", "O", "O", "O", "O", "O", "O"],
+          ["O", "O", "O", "O", "O", "O", "O"],
+          ["O", "O", "O", "O", "O", "O", "O"]
+        ]
+      });
+    }
 
     // Check column
     let columnWin = false;
