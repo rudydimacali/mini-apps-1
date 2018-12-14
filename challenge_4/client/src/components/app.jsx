@@ -15,6 +15,7 @@ export default class App extends React.Component {
         ["O", "O", "O", "O", "O", "O", "O"]
       ],
       nextPlayer: "X"
+      // X is RED, Y is YELLOW
     };
     this.clickPiece = this.clickPiece.bind(this);
     this.checkBoard = this.checkBoard.bind(this);
@@ -37,21 +38,24 @@ export default class App extends React.Component {
     this.checkBoard(i, Number(column));
   }
   checkBoard(row, column) {
+    let currentBoard = this.state.boardState.slice();
     // Check row
-    
+    let rowWin = false;
+
     // Check column
+    let columnWin = false;
 
     // Check diagonals
+    let diagonalWin = false;
 
     // Check for tie
-    let boardComplete = false;
-    this.state.boardState.forEach(row => {
-      if (!row.includes('O')) {
-        boardComplete = true;
-      }
-    })
-    if (boardComplete) => {
-      alert('Tie!');
+    let rowsComplete = [];
+    currentBoard.forEach(row => {
+      rowsComplete.push(!row.includes("O"));
+    });
+    let boardComplete = !rowsComplete.includes(false) ? true : false;
+    if (boardComplete) {
+      alert("Tie!");
       this.setState({
         boardState: [
           ["O", "O", "O", "O", "O", "O", "O"],
@@ -60,7 +64,8 @@ export default class App extends React.Component {
           ["O", "O", "O", "O", "O", "O", "O"],
           ["O", "O", "O", "O", "O", "O", "O"],
           ["O", "O", "O", "O", "O", "O", "O"]
-        ]});
+        ]
+      });
     }
   }
   render() {
